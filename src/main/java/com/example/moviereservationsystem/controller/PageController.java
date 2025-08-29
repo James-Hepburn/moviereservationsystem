@@ -20,8 +20,8 @@ public class PageController {
         return "register";
     }
 
-    @GetMapping("/test")
-    public String testPage() {
-        return "login";
+    @GetMapping("/movies")
+    public String moviesPage () {
+        return "movies";
     }
 }

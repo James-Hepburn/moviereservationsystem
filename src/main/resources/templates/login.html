@@ -117,6 +117,9 @@
 
         <div class = "extra-links">
             <p>Don’t have an account? <a href = "/register">Register</a></p>
+            <div th:if="${param.error}">
+                <p style="color: red;">Login failed. Please try again.</p>
+            </div>
         </div>
     </div>
 </body>

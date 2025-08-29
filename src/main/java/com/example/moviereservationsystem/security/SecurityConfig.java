@@ -34,8 +34,8 @@ public class SecurityConfig {
                 .sessionManagement (sm -> sm.sessionCreationPolicy (SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests (auth -> auth
                 .requestMatchers ("/api/auth/**").permitAll ()
-                .requestMatchers (HttpMethod.GET, "/", "/login", "/register").permitAll ()
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                .requestMatchers (HttpMethod.GET, "/", "/login", "/register", "/movies").permitAll ()
+                        .requestMatchers(HttpMethod.POST, "/auth/login", "/auth/register").permitAll()
                         .requestMatchers (HttpMethod.GET, "/api/movies/**").permitAll ()
                         .anyRequest ().authenticated ())
                         .authenticationProvider (authenticationProvider ())

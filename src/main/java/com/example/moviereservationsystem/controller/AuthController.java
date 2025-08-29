@@ -18,13 +18,20 @@ public class AuthController {
             String jwt = this.authService.login (usernameOrEmail, password);
             return "redirect:/movies";
         } catch (RuntimeException e) {
+            e.printStackTrace();
             return "redirect:/login?error";
         }
     }
 
     @PostMapping("/register")
-    public User register (@RequestParam String username, @RequestParam String email, @RequestParam String password) {
-        return this.authService.register (username, email, password);
+    public String register (@RequestParam String username, @RequestParam String email, @RequestParam String password) {
+        try {
+            User user = this.authService.register (username, email, password);
+            return "redirect:/movies";
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            return "redirect:/register?error";
+        }
     }
 
     @PostMapping("/promote/{userId}")

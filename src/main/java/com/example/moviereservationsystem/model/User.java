@@ -23,7 +23,7 @@ public class User {
 
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Set<Role> roles;
 
     public User (String username, String email, String password, Set <Role> roles) {
