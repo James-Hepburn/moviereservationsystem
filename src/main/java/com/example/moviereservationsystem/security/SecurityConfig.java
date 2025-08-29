@@ -32,9 +32,13 @@ public class SecurityConfig {
         http.csrf (csrf -> csrf.disable ())
                 .cors (Customizer.withDefaults ())
                 .sessionManagement (sm -> sm.sessionCreationPolicy (SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests (auth -> auth.requestMatchers ("/api/auth/**").permitAll ()
-                        .requestMatchers (HttpMethod.GET, "/api/movies/**", "/").permitAll ()
-                        .anyRequest ().authenticated ()).authenticationProvider (authenticationProvider ())
+                .authorizeHttpRequests (auth -> auth
+                .requestMatchers ("/api/auth/**").permitAll ()
+                .requestMatchers (HttpMethod.GET, "/", "/login", "/register").permitAll ()
+                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                        .requestMatchers (HttpMethod.GET, "/api/movies/**").permitAll ()
+                        .anyRequest ().authenticated ())
+                        .authenticationProvider (authenticationProvider ())
                         .addFilterBefore (this.jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build ();
     }

@@ -3,17 +3,23 @@ package com.example.moviereservationsystem.controller;
 import com.example.moviereservationsystem.model.User;
 import com.example.moviereservationsystem.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/api/auth")
+@Controller
+@RequestMapping("/auth")
 public class AuthController {
     @Autowired
     private AuthService authService;
 
     @PostMapping("/login")
     public String login (@RequestParam String usernameOrEmail, @RequestParam String password) {
-        return this.authService.login (usernameOrEmail, password);
+        try {
+            String jwt = this.authService.login (usernameOrEmail, password);
+            return "redirect:/movies";
+        } catch (RuntimeException e) {
+            return "redirect:/login?error";
+        }
     }
 
     @PostMapping("/register")
